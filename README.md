@@ -1,4 +1,6 @@
-## project name
+## pooy
+
+![](./docs/assets/wrapper.webp)
 
 ## Run dev
 
