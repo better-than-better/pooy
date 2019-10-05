@@ -1,6 +1,8 @@
 ## pooy
 
-![](./docs/assets/wrapper.webp)
+<a href="https://pooy.hxtao.xyz">
+  <img src="./docs/assets/wrapper.webp" />
+</a>
 
 ## Run dev
 
