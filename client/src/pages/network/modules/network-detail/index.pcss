@@ -1,0 +1,78 @@
+.network-detail{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 46vw;
+  background: #fff;
+  box-shadow: 0 0 9px #9013FE;
+  z-index: 999;
+
+  .close-icon{
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    font-size: 32px;
+    color: #666;
+    z-index: 99;
+
+    &:hover{
+      color: red;
+    }
+  }
+
+  .hidden{
+    display: none;
+  }
+
+  & > .tabs-wrapper .tab-menus{
+    display: flex;
+    border-bottom: 2px solid #eee;
+
+    .tab-menu{
+      position: relative;
+      padding: 16px 20px;
+      user-select: none;
+
+      &.actived:after{
+        position: absolute;
+        bottom: -1px;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #8D0CFF;
+        content: "";
+      }
+    }
+  }
+
+  & > .tabs-wrapper .tabpanes{
+    max-height: calc(100vh - 52px);
+    overflow-y: scroll;
+  }
+
+  .drag{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    cursor: ew-resize;
+  }
+}
+
+.response-body{
+  margin: 10px;
+  padding: 10px;
+  height: calc(100vh -75px);
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+}
+
+.empty-body{
+  padding: 12px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.8;
+}

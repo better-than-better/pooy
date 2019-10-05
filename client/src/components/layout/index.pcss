@@ -1,0 +1,140 @@
+.layout{
+  padding: 0 0 0 277px;
+  box-sizing: border-box;
+
+  & > aside{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 277px;
+    background-image: linear-gradient(180deg, #802F90 0%, #571C66 74%, #541A62 80%, #491557 100%);
+    user-select: none;
+
+    .brand{
+      display: flex;
+      align-items: center;
+      padding: 100px 50px;
+      color: #fff;
+      font-family: PingFangSC-Semibold;
+      font-size: 24px;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+      user-select: none;
+
+      .logo-wrapper{
+        margin-right: 20px;
+      }
+    }
+
+    a{
+      display: block;
+      padding: 0 0 0 48px;
+      height: 60px;
+      line-height: 60px;
+      font-family: PingFangSC-Semibold;
+      font-size: 18px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      opacity: .7;
+
+      i{
+        font-size: 22px;
+        margin-right: 20px;
+        vertical-align: middle;
+        color: #fff;
+      }
+
+      &.active{
+        position: relative;
+        opacity: 1;
+        background: rgba(255,219,219,0.18);
+
+        &:after{
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 5px;
+          height: 100%;
+          background: rgba(255,255,255,0.76);
+          content: "";
+        }
+      }
+    }
+
+    .toggle-menu{
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 32px;
+      margin: auto;
+
+      i{
+        color: #fff;
+      }
+    }
+  }
+
+  & > main{
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  &.slimming{
+    padding: 0 0 0 86px;
+
+    .brand{
+      padding: 40px 0 80px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 12px;
+
+      .logo-wrapper{
+        margin: 0;
+        transform: scale(.8);
+      }
+    }
+
+    .toggle-menu{
+      i{
+        color: #d12957;
+      }
+    }
+
+    & > aside{
+      margin: 20px 10px;
+      width: 66px;
+      font-size: 0;
+      background: #fff;
+      border-radius: 50px;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
+      box-shadow: 0 0 8px rgba(133, 34, 220, 0.24);
+
+      a{
+        padding: 0;
+        text-align: center;
+        font-size: 0;
+
+        i{
+          opacity: 1;
+          color: #333;
+        }
+
+        &.active i{
+          color: var(--theme-color);
+        }
+
+        &.active:after{
+          display: none;
+        }
+
+        i{
+          margin: 0;
+        }
+      }
+    }
+  }
+}

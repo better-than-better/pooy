@@ -1,0 +1,162 @@
+.network-wrapper{
+
+  .action-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .pooy-button{
+      margin-right: 16px;
+    }
+
+    .filter-wrapper{
+      font-family: PingFangSC-Semibold;
+      font-size: 14px;
+      color: #666666;
+      letter-spacing: 0;
+
+      input{
+        padding: 12px 6px;
+        width: 158px;
+        height: 42px;
+        font-size: 14px;
+        font-family: PingFangSC-Semibold;
+        box-sizing: border-box;
+        border: none;
+        transition: width .2s ease-in;
+
+        &:focus{
+          width: 220px;
+        }
+      }
+
+      .icon-filter{
+        font-size: 22px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.request-list{
+  .list-tr{
+    display: flex;
+    border-top: 1px solid #f6f6f6;
+    cursor: default;
+    user-select: none;
+
+    &.pending{
+      opacity: .222;
+    }
+
+    &:hover{
+      background: rgba(217, 117, 234, 0.04);
+    }
+
+    &.actived{
+      background: rgba(217, 117, 234, 0.08);
+    }
+  }
+
+  .list-header{
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+    border-top: none;
+    border-bottom: 1px solid #D8D8D8;
+
+    &:hover{
+      background: transparent;
+    }
+  }
+
+  .list-body{
+    max-height: calc(100vh - 230px);
+    overflow-y: scroll;
+  }
+
+  .th, .td{
+    padding: 10px 12px;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &.error{
+      opacity: .6;
+      color: #F44336;
+    }
+
+    i{
+      color: #666;
+      vertical-align: middle;
+    }
+
+    .icon-https{
+      margin-right: 4px;
+      font-size: 14px;
+      color: #7ED321;
+    }
+
+    .icon-image{
+      color: #B8E986;
+    }
+
+    .icon-html{
+      color: #E44D26;
+    }
+
+    .icon-css{
+      color: #264DE4;
+    }
+
+    .icon-js{
+      color: #EC9A13;
+    }
+
+    .icon-json{
+      color: #EC9A13;
+    }
+
+    .icon-boom{
+      display: inline-block;
+      font-size: 13px;
+      transform: translate(-6px, 0);
+    }
+  }
+
+  .empty{
+    padding: 100px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #bbb;
+  }
+
+}
+
+.throttling-options{
+  padding: 10px 0;
+
+  & > .item{
+    margin: 16px 0;
+
+    input{
+      margin: 0 10px 0 0;
+    }
+  }
+}
+
+.throttling-desc{
+  margin: 20px 0;
+  padding: 10px;
+  text-align: center;
+  border: 2px dashed #ffd604;
+
+  &.online{
+    border-color: #7ED321;
+  }
+}

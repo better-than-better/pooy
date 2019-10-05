@@ -1,0 +1,75 @@
+{
+  "name": "pooy",
+  "version": "0.0.1-beta",
+  "description": "http proxy",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "node server/app.js & npm run client:dev",
+    "client:dev": "NODE_ENV=development webpack-dev-server --config client/webpack/webpack.dev.js",
+    "client:build": "rm -rf dist && NODE_ENV=production webpack --config client/webpack/webpack.prod.js",
+    "analyze": "rm -rf dist && NODE_ENV=production webpack --analyze --config client/webpack/webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.4",
+    "marked": "^0.7.0",
+    "prettier": "1.18.2",
+    "prismjs": "^1.17.1",
+    "prop-types": "^15.7.2",
+    "qrcode": "^1.4.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "socket.io": "^2.2.0",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^2.1.1",
+    "cssnano": "^4.1.10",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-nested": "^4.1.2",
+    "postcss-preset-env": "^6.6.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.31.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-merge": "^4.2.1",
+    "workbox-webpack-plugin": "^4.3.1",
+    "worker-loader": "^2.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/better-than-better/pooy.git"
+  },
+  "keywords": [
+    "http",
+    "https",
+    "ssl",
+    "proxy"
+  ],
+  "author": "hxtao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/better-than-better/pooy/issues"
+  },
+  "homepage": "https://github.com/better-than-better/pooy#readme"
+}

@@ -1,0 +1,51 @@
+.pooy-button{
+  display: inline-block;
+  position: relative;
+  height: 42px;
+  cursor: pointer;
+  user-select: none;
+
+  &.disabled{
+    opacity: .8;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .pooy-icon{
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .btn-shadow{
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    right: 9px;
+    left: 9px;
+    box-shadow: 0 0 12px #CFB3E9;
+    z-index: -1;
+    transition: all .32s ease;
+  }
+
+  button{
+    outline: none;
+    padding: 0 17px;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    background: #FFFFFF;
+    border: 1px solid rgba(246,246,246,0.73);
+    z-index: 99;
+    cursor: pointer;
+  }
+
+  button:active{
+    background: #faf5ff;
+  }
+
+  &:hover .btn-shadow{
+    box-shadow: 0 0 8px #CFB3E9;
+  }
+}

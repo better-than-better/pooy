@@ -1,0 +1,41 @@
+.radio-group-wrapper{
+  .radio-item{
+    margin-right: 8px;
+  }
+}
+
+.radio-item{
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  .radio-icon{
+    transition: all .32s ease;
+
+    &:after{
+      transform: scale(0);
+      animation: .2s ease scaleIn forwards;
+    }
+  }
+
+  .label{
+    display: inline-block;
+    padding: 0 8px;
+    font-size: 14px;
+  }
+
+  & > input[type=radio]{
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes scaleIn{
+  form{
+    transform: scale(0);
+  }
+
+  to{
+    transform: scale(1);
+  }
+}

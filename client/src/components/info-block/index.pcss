@@ -1,0 +1,40 @@
+.info-block{
+  padding: 20px 20px 30px;
+  border-bottom: 1px solid #eee;
+
+  & > .header{
+    padding-left: 12px;
+    font-family: PingFangTC-Medium;
+    font-size: 14px;
+    color: #222222;
+    letter-spacing: 0.58px;
+    border-left: 3px solid #D8D8D8;
+    user-select: none;
+
+    span{
+      margin-left: 80px;
+      cursor: pointer;
+      color: #999;
+      font-size: 12px;
+
+      &:hover{
+        color: #9696ff;
+      }
+    }
+  }
+
+  & > .content{
+    margin: 10px 0;
+    padding: 10px 14px;
+
+    p{
+      margin: 4px 0;
+      font-size: 12px;
+    }
+  }
+
+  &.source-mode > .content{
+    outline: none;
+    border: 2px solid rgba(0, 103, 244, 0.247);
+  }
+}

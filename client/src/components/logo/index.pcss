@@ -1,0 +1,58 @@
+.logo-wrapper{
+  display: inline-block;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  user-select: none;
+
+  .triangle{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 1px solid #D12957;
+    border-top-width: 0;
+    border-bottom-width: 28px;
+    border-left-width: 9px;
+    border-left-color: transparent;
+    border-right-width: 9px;
+    border-right-color: transparent;
+  }
+
+  .triangle-1{
+    top: 0;
+    left: 0;
+  }
+
+  .triangle-2{
+    top: 0;
+    right: 0;
+  }
+
+  .triangle-3{
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transform: rotate(180deg);
+  }
+
+  .eye{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 9px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+    transform: translate(0, -2px);
+  }
+
+  .eye-left{
+    left: 9px;
+  }
+
+  .eye-right{
+    right: 9px;
+  }
+}

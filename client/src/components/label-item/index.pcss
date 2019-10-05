@@ -1,0 +1,53 @@
+.label-item{
+  position: relative;
+  margin: 0 0 2px;
+  padding: 4px 8px;
+  border-radius: 2px;
+
+  label{
+    margin-right: 12px;
+    font-family: PingFangSC-Semibold;
+    font-size: 13px;
+    color: #222222;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  span{
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+  }
+
+  em{
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-left: 30px;
+    padding: 6px;
+    font-size: 12px;
+    color: #bbb;
+    font-style: normal;
+    cursor: pointer;
+    user-select: none;
+    background: #def3fd;
+    border-radius: 4px;
+  }
+
+  input{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &:hover{
+    background: #def3fd;
+
+    em{
+      display: inline;
+    }
+  }
+}

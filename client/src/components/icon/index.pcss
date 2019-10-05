@@ -1,0 +1,74 @@
+.pooy-icon{
+  font-family: iconfont;
+  color: #333;
+  font-style: normal;
+  font-weight: 600;
+
+  img{
+    width: 20px;
+    vertical-align: bottom;
+  }
+
+  &.icon-start{
+    color: #4caf50;
+  }
+
+  &.icon-throttling{
+    &:after{
+      content: "";
+    }
+  }
+
+  &.icon-ok{
+    display: inline-block;
+    margin-right: 8px;
+
+    &:after{
+      display: block;
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background-color: #7ED321;
+    }
+  }
+
+  &.icon-radio, &.icon-radio-checked{
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+
+    &:before, &:after{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      content: "";
+      box-sizing: border-box;
+    }
+  }
+
+  &.icon-radio:before, &.icon-radio-checked:before{
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    transition: all .24s ease;
+  }
+
+  &.icon-radio:hover:before,
+  &.icon-radio-checked:hover:before,
+  &.icon-radio-checked:before{
+    border-color: var(--theme-color);
+  }
+
+  &.icon-radio-checked:after{
+    width: 8px;
+    height: 8px;
+    border-radius: 5px;
+    background: var(--theme-color);
+  }
+}
