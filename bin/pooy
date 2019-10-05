@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+const program = require('commander');
+const create = require('../scripts/create');
+const pkg = require('../package.json');
+
+
+program
+  .command('create <dir>')
+  .option('-l, --library <name>', 'to specify library')
+  .option('-d, --demo', 'a simple demo')
+  .description('create into project')
+  .action((dir, cmd) => {
+    create(dir, cmd.library, cmd.demo);
+  });
+
+program.version(pkg.version);
+
+program.on('--help', function () {
+  console.log('\nExamples:');
+  console.log('  $ opps create simple-demo -d');
+  console.log('  $ opps create react-project -l react');
+  console.log('  $ opps create vue-project -l vue');
+});
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}
