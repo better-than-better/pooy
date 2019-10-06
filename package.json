@@ -7,9 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "node server/app.js & npm run client:dev",
+    "dev": "node scripts/dev.js",
     "client:dev": "NODE_ENV=development webpack-dev-server --config client/webpack/webpack.dev.js",
-    "client:build": "rm -rf client/dist && NODE_ENV=production webpack --config client/webpack/webpack.prod.js",
+    "build": "rm -rf client/dist && NODE_ENV=production webpack --config client/webpack/webpack.prod.js",
     "analyze": "rm -rf client/dist && NODE_ENV=production webpack --analyze --config client/webpack/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

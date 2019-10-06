@@ -19,6 +19,8 @@ program
       console.log('* Pooy successfully started.');
       console.log(`* proxy server run at: ${chalk.bold.blue(proxyAddress)}`);
       console.log(`* proxy web ui see: ${chalk.bold.yellow(clientAddress)}`);
+    }).catch(() => {
+      console.log('fail to start');
     });
   });
 

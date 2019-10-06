@@ -74,11 +74,8 @@ module.exports = function(io) {
 
   proxy.ignore([
     `${IPv4}:${CONFIG.client_port}`,
-    `${IPv4}:${CONFIG.proxy_port}`,
     `127.0.0.1:${CONFIG.client_port}`,
-    `127.0.0.1:${CONFIG.proxy_port}`,
-    `0.0.0.0:${CONFIG.client_port}`,
-    `0.0.0.0:${CONFIG.proxy_port}`
+    `0.0.0.0:${CONFIG.client_port}`
   ]);
 
   return proxy;

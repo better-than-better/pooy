@@ -1,8 +1,11 @@
 const server = require('../server');
+const chalk = require('chalk');
 
 module.exports = function start(options) {
-  return new Promise((reslove, reject) => {
-    server();
-    reslove();
-  });
+  if (!process.env.SUDO_USER) {
+    console.log('administrator privileges is required, please try ' + chalk.bold.yellow('sudo pooy'));
+    return Promise.reject();
+  }
+
+  return server();
 };
