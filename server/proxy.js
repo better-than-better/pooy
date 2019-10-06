@@ -1,7 +1,10 @@
 const Pooy = require('pooy-core');
 const rules = require('./proxy-rules');
+const { getIps } = require('./utils');
+const CONFIG = require('../config/index');
 const proxy = new Pooy();
-const PORT = 9009;
+
+const { IPv4 } = getIps();
 
 module.exports = function(io) {
   proxy.on('request', async (ctx) => {
@@ -36,7 +39,7 @@ module.exports = function(io) {
   // });
 
   proxy.on('response', (ctx) => {
-    ctx.setHeader('proxy-agent', 'pooy@0.0.1-alpha1');
+    ctx.setHeader('proxy-agent', 'pooy@0.0.1-beta');
   });
   
   proxy.on('responseEnd', (ctx) => {
@@ -67,7 +70,16 @@ module.exports = function(io) {
 
   proxy.useRules(rules);
   
-  proxy.listen(PORT);
+  proxy.listen(CONFIG.proxy_port);
+
+  proxy.ignore([
+    `${IPv4}:${CONFIG.client_port}`,
+    `${IPv4}:${CONFIG.proxy_port}`,
+    `127.0.0.1:${CONFIG.client_port}`,
+    `127.0.0.1:${CONFIG.proxy_port}`,
+    `0.0.0.0:${CONFIG.client_port}`,
+    `0.0.0.0:${CONFIG.proxy_port}`
+  ]);
 
   return proxy;
 };

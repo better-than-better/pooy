@@ -22,7 +22,7 @@ const entry = getEntry();
 
 const plugins = Object.keys(entry).map(name => {
   return new HTMLPlugin({
-    filename: `client/${name}.html`,
+    filename: `${name}.html`,
     template: `client/src/index.html`,
     favicon: path.resolve(__dirname, '../src/assets/favicon.ico'),
     inject: true,

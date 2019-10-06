@@ -1,8 +1,8 @@
 const url = require('url');
 const fs = require('fs');
 const querystring = require('querystring');
+const mime = require('mime');
 const { getIps } = require('./utils');
-const PROXY_PORT = 9009;
 const PROXY_HOST = 'ca.pooy'
 
 const POOY_DIR = `${process.env.HOME}/.pooy`;
@@ -22,6 +22,24 @@ module.exports = function (req, res) {
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify(data));
   };
+
+  if (!/\.pooy$/.test(pathname)) {
+    const p = `${__dirname}/../client/dist${pathname === '/' ? pathname + 'index.html' : pathname}`;
+
+    if (fs.existsSync(p)) {
+      const reader = fs.createReadStream(p);
+
+      res.setHeader('content-type', mime.getType(p));
+      reader.pipe(res);
+    } else {
+      const reader = fs.createReadStream(`${__dirname}/../client/dist/index.html`);
+
+      res.setHeader('content-type', 'text/html');
+      reader.pipe(res);
+    }
+
+    return;
+  }
 
   if (pathname === '/response.pooy') {
     const targetDir = `${POOY_DIR}/tmp/${queryData.id}`;

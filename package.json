@@ -9,13 +9,16 @@
   "scripts": {
     "dev": "node server/app.js & npm run client:dev",
     "client:dev": "NODE_ENV=development webpack-dev-server --config client/webpack/webpack.dev.js",
-    "client:build": "rm -rf dist && NODE_ENV=production webpack --config client/webpack/webpack.prod.js",
-    "analyze": "rm -rf dist && NODE_ENV=production webpack --analyze --config client/webpack/webpack.prod.js",
+    "client:build": "rm -rf client/dist && NODE_ENV=production webpack --config client/webpack/webpack.prod.js",
+    "analyze": "rm -rf client/dist && NODE_ENV=production webpack --analyze --config client/webpack/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.4",
+    "chalk": "^2.4.2",
+    "commander": "^3.0.2",
     "marked": "^0.7.0",
+    "mime": "^2.4.4",
     "prettier": "1.18.2",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
@@ -24,7 +27,9 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "socket.io": "^2.2.0",
-    "whatwg-fetch": "^3.0.0"
+    "static-server": "^2.2.1",
+    "whatwg-fetch": "^3.0.0",
+    "yaml": "^1.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -43,11 +48,11 @@
     "postcss-preset-env": "^6.6.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.31.0",
+    "webpack": "^4.41.0",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-cli": "^3.3.2",
+    "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.3.1",
-    "webpack-merge": "^4.2.1",
+    "webpack-merge": "^4.2.2",
     "workbox-webpack-plugin": "^4.3.1",
     "worker-loader": "^2.0.0"
   },
