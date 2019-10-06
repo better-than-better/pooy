@@ -1,4 +1,4 @@
-## POOY
+# POOY
 
 <a href="https://pooy.hxtao.xyz">
   <img src="./docs/assets/wrapper.webp" />
