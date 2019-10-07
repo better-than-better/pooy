@@ -66,6 +66,13 @@
 
       cr.innerHTML = `© ${date.getFullYear()} <i class="iconfont icon-aixin"></i> _始於夏末_`;
     })();
+    ;(function () {
+      if ('serviceWorker' in navigator) {
+        window.onload = function() {
+          navigator.serviceWorker.register('/sw.js');
+        }
+      }
+    })();
   </script>
 </body>
 </html>
