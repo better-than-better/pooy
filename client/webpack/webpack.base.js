@@ -52,14 +52,15 @@ const baseWebpackConfig = {
       '@helper': resolvePath('src/helper'),
       '@api': resolvePath('src/api'),
       '@pages': resolvePath('src/pages'),
-      '@config': resolvePath('src/config')
+      '@config': resolvePath('src/config'),
+      '@i18n': resolvePath('src/i18n')
     },
     extensions: ['.js', '.jsx', '.tsx', '.json']
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         include: [`${path.join(__dirname, '..', '/src')}`]
       },

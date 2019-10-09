@@ -1,0 +1,80 @@
+{
+  "global": {
+    "nav-network": "网络",
+    "nav-rule": "规则",
+    "nav-plugin": "插件",
+    "nav-ca": "证书",
+    "nav-setting": "设置",
+    "nav-about": "关于",
+    "confirm": "确定",
+    "cancel": "取消"
+  },
+  "network": {
+    "action-stop": "停止",
+    "action-start": "开始",
+    "action-clear": "清除",
+    "action-throttling": "龟速",
+    "action-throttling-unset": "未设置-正常网络",
+    "action-throttling-modal-title": "设置网络环境",
+    "action-repeat": "请求重发",
+    "mime-all": "全部",
+    "mime-html": "HTML",
+    "mime-css": "CSS",
+    "mime-js": "JS",
+    "mime-img": "图片",
+    "mime-audio": "音频",
+    "mime-video": "视频",
+    "mime-font": "字体",
+    "mime-other": "其它",
+    "download": "下行",
+    "upload": "上行",
+    "action-filter": "filer",
+    "list-type": "类型",
+    "list-status": "状态码",
+    "list-method": "请求方法",
+    "list-domain": "域",
+    "list-path": "路径",
+    "list-size": "荷载",
+    "list-time": "耗时",
+    "list-empty": "暂无网络活动",
+    "throttling-custom-placeholder": "不填默认正常网络",
+    "offline-tips": "模拟断网",
+    "online-tips": "正常网络环境"
+  },
+  "rule": {
+    "create": "创建",
+    "enable": "启用",
+    "disable": "停用",
+    "enabled-desc": "已全局启用代理规则",
+    "disabled-desc": "已全局停用代理规则",
+    "type": "类型",
+    "desc": "描述",
+    "operate": "操作",
+    "del": "删除",
+    "empty": "暂无规则",
+    "dns-analysis": "DSN 解析",
+    "request-forward": "请求转发",
+    "custom-response-header": "自定义响应头",
+    "custom-script": "自定义脚本"
+  },
+  "plugin": {
+    "sub-title": "自带插件",
+    "help-tips": "实验性功能，暂不可用",
+    "installed": "已安装",
+    "install": "安装"
+  },
+  "ca": {
+    "help-tips": "扫码下载根证书，或者直接访问"
+  },
+  "setting": {
+    "sub-title": "基础设置",
+    "lan": "语言",
+    "ok-message": "设置成功"
+  },
+  "about": {
+    "sub-title": "关于 pooy",
+    "current-v": "当前版本",
+    "check-update": "检测更新",
+    "updated": "已经是最新了"
+  }
+}

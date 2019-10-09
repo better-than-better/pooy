@@ -42,15 +42,15 @@ class App extends React.PureComponent{
   render() {
     return (
       <Router>
-        <Layout >
-            <Switch>
-              <Route path="/" exact component={(props) => <NetworkPage {...props} dataPool={this.DATA_POOL} onData={this.updateDataPool} clearDataPool={this.clearDataPool} />} />
-              <Route path="/rules" component={RulesPage} />
-              <Route path="/plugins" component={PluginsPage} />
-              <Route path="/ca" component={CAPage} />
-              <Route path="/setting" component={SettingPage} />
-              <Route path="/about" component={AboutPage} />
-            </Switch>
+        <Layout>
+          <Switch>
+            <Route path="/" exact component={(props) => <NetworkPage {...props} dataPool={this.DATA_POOL} onData={this.updateDataPool} clearDataPool={this.clearDataPool} />} />
+            <Route path="/rules" component={RulesPage} />
+            <Route path="/plugins" component={PluginsPage} />
+            <Route path="/ca" component={CAPage} />
+            <Route path="/setting" component={SettingPage} />
+            <Route path="/about" component={AboutPage} />
+          </Switch>
         </Layout>
       </Router>
     );

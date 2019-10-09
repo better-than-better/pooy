@@ -1,0 +1,70 @@
+.pooy-select{
+  position: relative;
+  display: inline-block;
+  font-size: 12px;
+
+  .select-val{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 6px;
+    min-width: 112px;
+    height: 36px;
+    border: 1px solid #E7E7E7;
+    border-radius: 6px;
+    cursor: pointer;
+    box-sizing: border-box;
+    user-select: none;
+
+    &:hover{
+      border-color: #f3afff;
+    }
+
+    i{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 6px;
+      margin: auto;
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 16px;
+      color: #42494F;
+      transition: transform .24s ease;
+    }
+  }
+
+  &.active{
+    i{
+      transform: rotate(180deg);
+    }
+
+    .select-val{
+      border-color: #f3afff;
+    }
+  }
+
+  & > .select-options{
+    position: absolute;
+    top: 110%;
+    left: 0;
+    box-shadow: 1px 2px 5px #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+
+    .option{
+      min-width: 112px;
+      height: 36px;
+      padding: 10px 6px;
+      box-sizing: border-box;
+      cursor: pointer;
+
+      &.selected{
+        background: #f9f9f9;
+        font-family: PingFangSC-Semibold;
+      }
+    }
+  }
+}

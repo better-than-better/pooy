@@ -1,36 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import './index.pcss';
 
-const types = [{
-  name: '全部',
-  key: 'all'
-}, {
-  name: 'HTML',
-  key: 'html'
-}, {
-  name: 'JS',
-  key: 'js'
-}, {
-  name: 'CSS',
-  key: 'css'
-}, {
-  name: '图片',
-  key: 'image'
-}, {
-  name: '音频',
-  key: 'audio'
-}, {
-  name: '视频',
-  key: 'video'
-}, {
-  name: '字体',
-  key: 'font'
-}, {
-  name: '其它',
-  key: 'others'
-}];
+import I18N from '@i18n';
+import { getLan } from '@helper/utils';
+
+const Language = I18N[getLan()].network;
 
 const MimeTypePicker = (props) => {
+  const types = [{
+    name: Language['mime-all'],
+    key: 'all'
+  }, {
+    name: Language['mime-html'],
+    key: 'html'
+  }, {
+    name: Language['mime-js'],
+    key: 'js'
+  }, {
+    name: Language['mime-css'],
+    key: 'css'
+  }, {
+    name: Language['mime-img'],
+    key: 'image'
+  }, {
+    name: Language['mime-audio'],
+    key: 'audio'
+  }, {
+    name: Language['mime-video'],
+    key: 'video'
+  }, {
+    name: Language['mime-font'],
+    key: 'font'
+  }, {
+    name: Language['mime-other'],
+    key: 'others'
+  }];
+
   const [ value, setValue ] = useState(props.value);
 
   const handleClick = (val) => {

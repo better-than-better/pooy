@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import I18N from '@i18n';
+import { getLan } from '@helper/utils';
+
 import Icon from '@components/icon';
 import './index.pcss';
 
@@ -53,8 +56,9 @@ class Modal extends React.PureComponent{
   }
 
   render() {
+    const Language = I18N[getLan()].global;
     const { visible } = this.state;
-    const { title, children, okText, cancelText, showCloseIcon } = this.props;
+    const { title, children, okText = Language['confirm'], cancelText = Language['cancel'], showCloseIcon } = this.props;
 
     return visible ? ReactDOM.createPortal((
       <div className="modal-wrapper" onClick={this.handleClick}>
@@ -76,8 +80,6 @@ class Modal extends React.PureComponent{
 
 Modal.defaultProps = {
   title: 'untitle',
-  okText: '确定',
-  cancelText: '取消',
   showCloseIcon: false
 };
 

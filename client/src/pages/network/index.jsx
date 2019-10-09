@@ -1,4 +1,7 @@
 import React from 'react';
+import I18N from '@i18n';
+import { getLan } from '@helper/utils';
+
 import Button from '@components/button';
 import Input from '@components/input';
 import Icon from '@components/icon';
@@ -55,43 +58,6 @@ const filterTime = (time = '') => {
 const filterHttps = (protocol) => {
   return protocol === 'https:' ? <Icon type="https" /> : null;
 }
-
-const columns = [{
-  title: '类型',
-  key: 'type',
-  width: '10%',
-  render: (req = {}, res = { headers: {} }) => <Icon type={filterIcons(res.headers['content-type'])} />
-}, {
-  title: '状态码',
-  key: 'statusCode',
-  width: '11%',
-  render: (req = {}, res = {}) => res.error ? '💣 fail' : (res.statusCode || '-')
-}, {
-  title: '请求方式',
-  key: 'method',
-  width: '11%',
-  render: (req = {}) => req.method || '-'
-}, {
-  title: '域',
-  key: 'host',
-  width: '21%',
-  render: (req = {}) => (<>{filterHttps(req.protocol)}{req.host || '-'}</>)
-}, {
-  title: '路径',
-  key: 'path',
-  width: '25%',
-  render: (req = {}) => req.path || '-'
-}, {
-  title: '荷载',
-  key: 'size',
-  width: '11%',
-  render: (req = {}, res = { headers: {} }) => filterSize(res.headers['content-length'])
-}, {
-  title: '耗时',
-  key: 'time',
-  width: '11%',
-  render: (req = {}, res = {}) => filterTime(res.time - req.time)
-}];
 
 class Network extends React.PureComponent {
   state = {
@@ -295,27 +261,28 @@ class Network extends React.PureComponent {
   }
 
   renderThrottlingOptions = () => {
+    const Language = I18N[getLan()].network;
     const { upload, download, throttlingType } = this.state;
     const disabled = ['4g', '3g'].includes(throttlingType);
 
     if (throttlingType === 'offline') {
-      return <div className="throttling-desc offline">⚠️ 模拟断网 ⚠️</div>;
+      return <div className="throttling-desc offline">⚠️ {Language['offline-tips']} ⚠️</div>;
     }
 
     if (throttlingType === 'online') {
-      return <div className="throttling-desc online">✅ 正常网络环境 ✅</div>;
+      return <div className="throttling-desc online">✅ {Language['online-tips']} ✅</div>;
     }
 
     return (
       <div className="throttling-options">
         <div className="item">
-          <label>上行：</label>
-          <Input placeholder="不填默认正常网络" value={upload} disabled={disabled} onChange={this.handleThrottlingValue.bind(null, 'upload')} />
+          <label>{Language['upload']}:</label>
+          <Input placeholder={Language['throttling-custom-placeholder']} value={upload} disabled={disabled} onChange={this.handleThrottlingValue.bind(null, 'upload')} />
           kb/s
         </div>
         <div className="item">
-          <label>下行：</label>
-          <Input placeholder="不填默认正常网络" value={download} disabled={disabled} onChange={this.handleThrottlingValue.bind(null, 'download')} />
+          <label>{Language['download']}:</label>
+          <Input placeholder={Language['throttling-custom-placeholder']} value={download} disabled={disabled} onChange={this.handleThrottlingValue.bind(null, 'download')} />
           kb/s
         </div>
       </div>
@@ -324,6 +291,7 @@ class Network extends React.PureComponent {
   
 
   render() {
+    const Language = I18N[getLan()].network;
     const {
       activeId, enabled, requestData = {},
       responseData = {}, currentNetwork, mimieType,
@@ -332,22 +300,59 @@ class Network extends React.PureComponent {
 
     const requestIds = this.filterShows(mimieType, keywords, requestData, responseData);
 
+    const columns = [{
+      title: Language['list-type'],
+      key: 'type',
+      width: '10%',
+      render: (req = {}, res = { headers: {} }) => <Icon type={filterIcons(res.headers['content-type'])} />
+    }, {
+      title: Language['list-status'],
+      key: 'statusCode',
+      width: '11%',
+      render: (req = {}, res = {}) => res.error ? '💣 fail' : (res.statusCode || '-')
+    }, {
+      title: Language['list-method'],
+      key: 'method',
+      width: '11%',
+      render: (req = {}) => req.method || '-'
+    }, {
+      title: Language['list-domain'],
+      key: 'host',
+      width: '21%',
+      render: (req = {}) => (<>{filterHttps(req.protocol)}{req.host || '-'}</>)
+    }, {
+      title: Language['list-path'],
+      key: 'path',
+      width: '25%',
+      render: (req = {}) => req.path || '-'
+    }, {
+      title: Language['list-size'],
+      key: 'size',
+      width: '11%',
+      render: (req = {}, res = { headers: {} }) => filterSize(res.headers['content-length'])
+    }, {
+      title: Language['list-time'],
+      key: 'time',
+      width: '11%',
+      render: (req = {}, res = {}) => filterTime(res.time - req.time)
+    }];
+
     return (
       <div className="network-wrapper">
         {/* 工具栏 */}
         <div className="action-bar">
           <div className="btns">
             <Button onClick={this.toggleStatus}>
-              {enabled ? <><Icon type="start" />开始</> : <><Icon type="stop" />停止</>}
+              {enabled ? <><Icon type="start" />{Language['action-start']}</> : <><Icon type="stop" />{Language['action-stop']}</>}
             </Button>
-            <Button onClick={this.clearData}><Icon type="clear" />清除</Button>
-            <Button onClick={this.showModal}><Icon type="throttling" />龟速（未设置-正常网络）</Button>
-            <Button disabled><Icon type="repeat" />请求重发</Button>
+            <Button onClick={this.clearData}><Icon type="clear" />{Language['action-clear']}</Button>
+            <Button onClick={this.showModal}><Icon type="throttling" />{Language['action-throttling']}（{Language['action-throttling-unset']}）</Button>
+            <Button disabled><Icon type="repeat" />{Language['action-repeat']}</Button>
           </div>
           <div className="filter-wrapper">
             <input
               type="text"
-              placeholder="输入关键字进行筛选吧"
+              placeholder={Language['action-filter']}
               value={keywords}
               onChange={this.handleKewords}
             />
@@ -375,7 +380,7 @@ class Network extends React.PureComponent {
                     ))
                   }
                 </div>
-              )) : <div className="empty">暂无网络活动</div>
+              )) : <div className="empty">{Language['list-empty']}</div>
             }
           </div>
         </div>
@@ -386,7 +391,7 @@ class Network extends React.PureComponent {
           onClose={this.closeDetail}
         />
         <Modal
-          title="设置网络环境"
+          title={Language['action-throttling-modal-title']}
           visible={visible}
           onClose={this.closeModal}
           onOk={this.handleOk}

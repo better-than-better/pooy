@@ -44,9 +44,30 @@ const throttle = function throttle(fn, sliceTime = 200) {
   };
 };
 
+/**
+ * 获取语言
+ * @param {String} lan
+ * @return {String}
+ */
+const setLan = (lan = 'en') => {
+  localStorage.setItem('pooy:lan', lan);
+  window.updateLayout && window.updateLayout();
+  return lan;
+}
+
+/**
+ * 获取语言
+ * @return {String}
+ */
+const getLan = () => {
+  return localStorage.getItem('pooy:lan') || 'en';
+}
+
 export {
   param2string,
   getField,
   filterSize,
-  throttle
+  throttle,
+  setLan,
+  getLan
 }

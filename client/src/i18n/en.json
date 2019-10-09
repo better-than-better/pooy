@@ -1,0 +1,80 @@
+{
+  "global": {
+    "nav-network": "network",
+    "nav-rule": "rule",
+    "nav-plugin": "plugin",
+    "nav-ca": "ca",
+    "nav-setting": "setting",
+    "nav-about": "about",
+    "confirm": "confirm",
+    "cancel": "cancel"
+  },
+  "network": {
+    "action-stop": "stop",
+    "action-start": "start",
+    "action-clear": "clear",
+    "action-throttling": "throttling",
+    "action-throttling-unset": "unset",
+    "action-throttling-modal-title": "set throttling",
+    "action-repeat": "repeat",
+    "mime-all": "ALL",
+    "mime-html": "HTML",
+    "mime-css": "CSS",
+    "mime-js": "JS",
+    "mime-img": "Img",
+    "mime-audio": "Audio",
+    "mime-video": "Video",
+    "mime-font": "Font",
+    "mime-other": "Other",
+    "download": "download",
+    "upload": "upload",
+    "action-filter": "filer",
+    "list-type": "Type",
+    "list-status": "Status",
+    "list-method": "Method",
+    "list-domain": "Domain",
+    "list-path": "Path",
+    "list-size": "Size",
+    "list-time": "Time",
+    "list-empty": "no records",
+    "throttling-custom-placeholder": "default to noraml",
+    "offline-tips": "offline",
+    "online-tips": "Normal network environment"
+  },
+  "rule": {
+    "create": "create",
+    "enable": "enable",
+    "disable": "disable",
+    "enabled-desc": "proxy have been enabled globally",
+    "disabled-desc": "proxy have been disabled globally",
+    "type": "type",
+    "desc": "description",
+    "operate": "operate",
+    "del": "delete",
+    "empty": "no rules",
+    "dns-analysis": "DSN Analysis",
+    "request-forward": "Request Forward",
+    "custom-response-header": "Custom Response Header",
+    "custom-script": "Custom Script"
+  },
+  "plugin": {
+    "sub-title": "system plugins",
+    "help-tips": "Experimental function, temporarily unavailable",
+    "installed": "installed",
+    "install": "install"
+  },
+  "ca": {
+    "help-tips": "Scan the code to download the root certificate, or directly access"
+  },
+  "setting": {
+    "sub-title": "base setting",
+    "lan": "language",
+    "ok-message": "Successful setup"
+  },
+  "about": {
+    "sub-title": "about pooy",
+    "current-v": "current version",
+    "check-update": "check update",
+    "updated": "already the latest"
+  }
+}

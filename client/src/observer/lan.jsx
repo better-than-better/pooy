@@ -1,0 +1,3 @@
+function Observer() {
+  this.subscribers = [];
+}
