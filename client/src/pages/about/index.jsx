@@ -16,7 +16,7 @@ const About = (props) => {
     <div className="about-page">
       <SubTitle name={Language['sub-title']} />
       <div className="content">
-        <p>{Language['current-v']} 0.0.1-beta <button onClick={checkUpdate}>{Language['current-v']}</button></p>
+        <p>{Language['current-v']} 0.0.1-beta <button onClick={checkUpdate}>{Language['check-update']}</button></p>
       </div>
     </div>
   );
