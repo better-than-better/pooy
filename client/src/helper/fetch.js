@@ -77,6 +77,51 @@ function post(url, options = {}) {
   return _request(url, options);
 }
 
+function put(url, options = {}) {
+  if (!url) { url = '/'; }
+
+  options.method = 'PUT';
+
+  options = Object.assign({
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  }, options);
+
+  if (options.headers['Content-Type'] === 'application/x-www-form-urlencoded' && typeof options.body === 'object') {
+    options.body = param2string(options.body);
+  }
+
+  return _request(url, options);
+}
+
+function del(url, options = {}) {
+  if (!url) { url = '/'; }
+
+  if (!options) {
+    options = {};
+  }
+
+  options.method = 'DELETE';
+
+  if (typeof options.params === 'object') {
+    options.params = param2string(options.params);
+  }
+
+  if (options.params) {
+    if (url.indexOf('?') < 0) {
+      url += `?${options.params}`;
+    } else {
+      url += `&${options.params}`;
+    }
+  }
+
+  delete options.params;
+
+  return _request(url, options);
+}
+
 function postForm(url, options = {}) {
   if (!url) { url = '/'; }
   options.method = 'POST';
@@ -102,9 +147,22 @@ function postJSON(url, options = {}) {
   return post(url, options);
 }
 
+function putJSON(url, options = {}) {
+  options.headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  };
+
+  options.body = JSON.stringify(options.body);
+
+  return put(url, options);
+}
+
 export {
   get,
   post,
+  del,
   postForm,
-  postJSON
+  postJSON,
+  putJSON
 };

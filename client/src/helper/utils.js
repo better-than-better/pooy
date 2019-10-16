@@ -63,11 +63,70 @@ const getLan = () => {
   return localStorage.getItem('pooy:lan') || 'en';
 }
 
+/**
+ * 获取某元素相对某父节点的位置(如果遇到 offsetParent 为 fixed 的情况不在继续)
+ * @param {Element} ref 
+ * @param {Element} target 
+ */
+const getAbsolutePos = (ref, target) => {
+  if (!target) return {
+    ref,
+    width: 0,
+    height: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0
+  };
+
+  const pos = {
+    width: target.clientWidth,
+    height: target.clientHeight,
+    top: -target.clientTop,
+    left: -target.clientLeft
+  };
+  
+  let node = target;
+
+  while(node != ref && node) {
+    pos.left = pos.left + node.offsetLeft;
+    pos.top = pos.top + node.offsetTop + node.clientTop;
+    node = node.offsetParent;
+
+    if (node && getComputedStyle(node).position === 'fixed') {
+      ref = node;
+    }
+  }
+
+  if(isNaN(ref.scrollLeft)){
+    pos.right = document.documentElement.scrollWidth - pos.left;
+    pos.bottom = document.documentElement.scrollHeight - pos.top;
+  } else {
+    pos.right = ref.scrollWidth - pos.left;
+    pos.bottom = ref.scrollHeight - pos.top;
+  }
+
+  pos.ref = node;
+  return pos;
+};
+
+const getPageEnv = () => {
+  let env = 'web';
+
+  if (window.process && window.process.versions && window.process.versions.electron) {
+    env = 'electron';
+  }
+
+  return env;
+};
+
 export {
   param2string,
   getField,
   filterSize,
   throttle,
   setLan,
-  getLan
+  getLan,
+  getAbsolutePos,
+  getPageEnv
 }

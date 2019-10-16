@@ -12,7 +12,6 @@ module.exports = merge(baseWebpackConfig, {
   devServer: {
     compress: true,
     hot: true,
-    host: 'localhost',
     port: 9001,
     open: true,
     host: '0.0.0.0',

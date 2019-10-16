@@ -33,7 +33,7 @@ const CA = () => {
   return (
     <div className="ca-wrapper">
       <img src={qrcodeImg} alt="qrcode" />
-      <p>{Language['help-tips']}<a href={rootCA}>{rootCA}</a></p>
+      <p>{Language['help-tips']} <a href={rootCA}>{rootCA}</a></p>
     </div>
   );
 };

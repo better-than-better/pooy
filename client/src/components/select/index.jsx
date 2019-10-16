@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import I18N from '@i18n';
+import { getLan, throttle, getAbsolutePos } from '@helper/utils';
+
 import Icon from '@components/icon';
 import './index.pcss';
 
@@ -13,77 +17,192 @@ Option.propTypes = {
   children: PropTypes.string
 };
 
-const Select = (p) => {
-  const props = {...p, children: [] };
-  const [ active, setActive ] = useState(false);
-  const [ value, setValue ] = useState(props.value);
+const filterValue = (val, multiple) => {
+  const s = v => v !== undefined ? [v] : [];
 
-  const filterName = (val) => {
-    const option = p.children.find(v => v.props.value === val);
+  if (!multiple) return s(val).map(v => v.toString())
 
-    return option ? option.props.children.toString() : ''
-  };
-
-  const toggleActive = (e) => {
-    e.stopPropagation();
-    setActive(!active);
-  };
-
-  const handleClick = (e) => {
-    setActive(false);
-  };
-
-  const handleValue = (val) => {
-    if (props.onChange) {
-      props.onChange(val);
-    } else {
-      setValue(val);
-    }
-  };
-
-  p.children.forEach((v) => {
-    const child = {...v};
-
-    child.props = {
-      ...v.props,
-      onClick: handleValue.bind(null, v.props.value),
-      selected: value === v.props.value,
-    };
-
-    props.children.push(child);
-  });
-
-  useEffect(() => {
-    setValue(props.value);
-    window.addEventListener('click', handleClick, false);
-
-    return () => {
-      window.removeEventListener('click', handleClick, false);
-    };
-  }, [props.value]);
-
-  return (
-    <div className={`pooy-select ${active ? 'active' : ''}`}>
-      <div className="select-val" onClick={toggleActive}>
-        {value ? filterName(value) : p.placeholder}
-        <Icon type="down" />
-      </div>
-      {active && <div className="select-options">
-        {props.children}
-      </div>}
-    </div>
-  );
+  return (Array.isArray(val) ? val : s(val)).map(v => v.toString());
 };
+
+class Select extends React.PureComponent {
+  state = {
+    active: false,
+    value: filterValue(this.props.value, this.props.multiple)
+  }
+
+  static getDerivedStateFromProps({ value, multiple, onChange }, state) {
+    if (value === state.value || !onChange) return null;
+
+    return {
+      value: filterValue(value, multiple)
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('click', this.handleClick, false);
+    window.addEventListener('resize', this.handlePosChange, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleClick, false);
+    window.removeEventListener('resize', this.handlePosChange, false);
+  }
+
+  initOptionsContainer() {
+    const { active } = this.state;
+    const pos = getAbsolutePos(document.body, this.selectDOM);
+    const selectOptionsContainer = pos.ref;
+
+    if (active) {
+      this.selectOptionsDOM = this.selectOptionsDOM || document.createElement('div');
+      this.selectOptionsDOM.style = `
+        position: absolute;
+        top: ${pos.top + pos.height + 4}px;
+        left: ${pos.left}px;
+        z-index: 999;
+      `;
+  
+      if (!selectOptionsContainer.contains(this.selectOptionsDOM)) {
+        selectOptionsContainer.appendChild(this.selectOptionsDOM);
+      }
+    } else {
+      if (selectOptionsContainer.contains(this.selectOptionsDOM)) {
+        selectOptionsContainer.removeChild(this.selectOptionsDOM)
+      }
+      this.selectOptionsDOM = null;
+    }
+  }
+
+  createProps = () => {
+    const props = {...this.props, children: [] };
+    const { value } = this.state;
+
+    this.props.children.forEach((v) => {
+      const child = {...v};
+  
+      child.props = {
+        ...v.props,
+        onClick: this.handleValue.bind(null, v.props.value),
+        selected: value.includes(v.props.value),
+      };
+  
+      props.children.push(child);
+    });
+
+    return props;
+  }
+
+  handleValue = (val) => {
+    const { multiple, onChange } = this.props;
+    const { value } = this.state;
+
+    if (!multiple && val === value[0]) return;
+
+    let newVal = [];
+
+    if (value.includes(val)) {
+      newVal = value.filter(v => v !== val);
+    } else {
+      newVal = [...value, val];
+    }
+
+    const v = multiple ? newVal : newVal[newVal.length - 1];
+
+    onChange ? onChange(v) : this.setState({ value: v });
+  };
+
+  /**
+   * 关闭下拉选项
+   */
+  handleClick = (e) => {
+    if (this.props.multiple && /^option/.test(e.target.className)) return;
+
+    this.setState({ active: false });
+  }
+
+  handlePosChange = throttle(() => {
+    this.initOptionsContainer()
+  }, 20)
+
+  toggleActive = (e) => {
+    if (/^(val-item|pooy-icon)/.test(e.target.className) && this.props.multiple) return;
+    e.stopPropagation();
+    this.setState({ active: !this.state.active });
+  }
+
+  filterName = (val, props) => {
+    const option = props.children.filter(v => val.includes(v.props.value));
+
+    const arr = [];
+
+    val.forEach(x => {
+      const obj = props.children.find(y => x === y.props.value);
+
+      if (obj) {
+        arr.push(obj)
+      }
+    });
+
+    return arr.length ? arr.map((v, i) => (
+      <span className="val-item" key={i}>
+        {v.props.children.toString()}
+        {props.multiple && <Icon type="close1" onClick={this.removeItem.bind(null, v.props.value)} />}
+      </span>
+    )) : '';
+  }
+
+  removeItem = (val) => {
+    this.handleValue(val);
+  }
+
+  render() {
+    const Language = I18N[getLan()].global;
+    const props = this.createProps();
+    const { disable, multiple, placeholder, children } = props;
+    const { active, value } = this.state;
+    const width = props.width ? +props.width : null;
+
+    this.initOptionsContainer();
+
+    return (
+      <div className={`pooy-select ${multiple ? 'multiple-select' : ''} ${active ? 'active' : ''} ${disable ? 'disabled' : ''}`} ref={ref => this.selectDOM = ref}>
+        <div className="select-val" onClick={this.toggleActive} style={{ width }}>
+          {value.length ? this.filterName(value, props) : (
+            <span className="placeholder">
+              {
+                placeholder || Language['select-placeholder']
+              }
+            </span>
+          )}
+          <Icon type="down" />
+        </div>
+        {
+          active && ReactDOM.createPortal((
+            <div className="pooy-select-options" style={{ width }}>
+              {children}
+            </div>
+          ), this.selectOptionsDOM)
+        }
+      </div>
+    );
+  }
+}
 
 Select.Option = Option;
 
 Select.propTypes = {
-  value: PropTypes.string,
-  placeholder: PropTypes.string
-};
-
-Select.defaultProps = {
-  placeholder: '请选择'
+  multiple: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
+  placeholder: PropTypes.string,
+  width: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
 };
 
 export default Select;

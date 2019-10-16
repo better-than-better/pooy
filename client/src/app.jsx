@@ -22,13 +22,16 @@ class App extends React.PureComponent{
     responseData: {}
   }
 
+  componentDidMount() {
+    Notification.requestPermission();
+  }
+
   DATA_POOL = {
     requestData: {},
     responseData: {}
   }
 
   clearDataPool = () => {
-    console.log('clear')
     this.DATA_POOL = {
       requestData: {},
       responseData: {}
