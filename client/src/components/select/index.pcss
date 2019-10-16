@@ -2,25 +2,41 @@
   position: relative;
   display: inline-block;
   font-size: 12px;
+  box-sizing: border-box;
+
+  &.disabled{
+    opacity: .8;
+    pointer-events: none;
+    cursor: not-allowed;
+
+    & > .select-val{
+      background: #f7f7f7;
+    }
+  }
+
+  .placeholder{
+    color: #999;
+  }
 
   .select-val{
     position: relative;
     display: inline-flex;
     align-items: center;
-    padding: 0 6px;
+    padding: 0 24px 0 6px;
     min-width: 112px;
-    height: 36px;
+    height: 32px;
     border: 1px solid #E7E7E7;
     border-radius: 6px;
     cursor: pointer;
     box-sizing: border-box;
     user-select: none;
+    cursor: text;
 
     &:hover{
       border-color: #f3afff;
     }
 
-    i{
+    i.icon-down{
       position: absolute;
       top: 0;
       bottom: 0;
@@ -45,26 +61,79 @@
       border-color: #f3afff;
     }
   }
+}
 
-  & > .select-options{
-    position: absolute;
-    top: 110%;
-    left: 0;
-    box-shadow: 1px 2px 5px #ccc;
-    border-radius: 6px;
+.pooy-select-options{
+  width: 100%;
+  box-shadow: 1px 2px 5px #ccc;
+  border-radius: 6px;
+  max-height: 224px;
+  overflow: auto;
+  /* overflow: hidden; */
+  background: #fff;
+
+  .option{
+    min-width: 112px;
+    height: 32px;
+    padding: 10px 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    box-sizing: border-box;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-    .option{
-      min-width: 112px;
-      height: 36px;
-      padding: 10px 6px;
-      box-sizing: border-box;
-      cursor: pointer;
+    &.selected{
+      background: #f9f9f9;
+      font-family: PingFangSC-Semibold;
+    }
 
-      &.selected{
-        background: #f9f9f9;
-        font-family: PingFangSC-Semibold;
+    &:hover{
+      background: #fbe7ff;
+    }
+  }
+}
+
+.multiple-select{
+  .select-val{
+    span.val-item{
+      position: relative;
+      display: inline-block;
+      margin-right: 4px;
+      padding: 2px 18px 2px 4px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      cursor: default;
+
+      .pooy-icon{
+        position: absolute;
+        top: 0;
+        right: 2px;
+        bottom: 0;
+        font-size: 12px;
+        margin: auto;
+        width: 12px;
+        height: 12px;
+        color: #333;
+        cursor: pointer;
+
+        &:hover{
+          color: #f3afff;
+        }
       }
     }
+  }
+}
+
+.pooy-select-options .option.selected{
+  position: relative;
+
+  &:after{
+    position: absolute;
+    right: 12px;
+    content: '\e6ad';
+    font-family: iconfont;
+    font-size: 18px;
+    color: #f3afff;
   }
 }

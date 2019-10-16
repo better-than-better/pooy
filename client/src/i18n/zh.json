@@ -7,7 +7,8 @@
     "nav-setting": "设置",
     "nav-about": "关于",
     "confirm": "确定",
-    "cancel": "取消"
+    "cancel": "取消",
+    "select-placeholder": "请选择"
   },
   "network": {
     "action-stop": "停止",
@@ -39,12 +40,17 @@
     "list-empty": "暂无网络活动",
     "throttling-custom-placeholder": "不填默认正常网络",
     "offline-tips": "模拟断网",
-    "online-tips": "正常网络环境"
+    "online-tips": "正常网络环境",
+    "unsupported-type": "不支持查看的请求体",
+    "empty-res-body": "无响应体",
+    "req-error": "请求失败",
+    "req-pending": "等待响应"
   },
   "rule": {
     "create": "创建",
     "enable": "启用",
     "disable": "停用",
+    "edit": "编辑",
     "enabled-desc": "已全局启用代理规则",
     "disabled-desc": "已全局停用代理规则",
     "type": "类型",
@@ -54,17 +60,22 @@
     "empty": "暂无规则",
     "dns-analysis": "DSN 解析",
     "request-forward": "请求转发",
-    "custom-response-header": "自定义响应头",
-    "custom-script": "自定义脚本"
+    "custom-response": "自定义响应",
+    "custom-script": "自定义脚本",
+    "modal-add-title": "创建规则",
+    "modal-eidt-title": "编辑规则",
+    "rule-type": "规则类型",
+    "rule-type-placeholder": "请选择"
   },
   "plugin": {
     "sub-title": "自带插件",
     "help-tips": "实验性功能，暂不可用",
     "installed": "已安装",
-    "install": "安装"
+    "install": "安装",
+    "installing": "安装中..."
   },
   "ca": {
-    "help-tips": "扫码下载根证书，或者直接访问"
+    "help-tips": "移动端调试，扫码下载根证书，或者直接访问"
   },
   "setting": {
     "sub-title": "基础设置",

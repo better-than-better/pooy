@@ -4,6 +4,10 @@ import { getLan } from '@helper/utils';
 import HelpTips from '@components/help-tips';
 import SubTitle from '@components/sub-title';
 import Icon from '@components/icon';
+
+import icon1 from '@assets/p-mock.jpeg';
+import icon2 from '@assets/p-jsonp.jpeg';
+
 import './index.pcss';
 
 const Plugins = () => {
@@ -14,16 +18,22 @@ const Plugins = () => {
       type: 'system',
       desc: '提供一种接口数据模拟的方式',
       status: 1,
-      icon: '//note-cdn.hxtao.xyz/images/8cd18c4636c7eb20dc3f05b3.webp'
+      icon: icon1
     },
     {
       name: 'JSONP Preview',
       type: 'system',
       desc: 'jsonp 格式化插件，优化数据查 看体验',
       status: 0,
-      icon: '//note-cdn.hxtao.xyz/images/bb8be2047db1f300ca18d258.webp'
+      icon: icon2
     }
   ]);
+
+  const [ installing, setInstalling ] = useState(false);
+
+  const toInstall = () => {
+    setInstalling(true);
+  };
 
   return (
     <div className="plugins-page">
@@ -40,8 +50,9 @@ const Plugins = () => {
                     <Icon type="checked" /> {Language['installed']}
                   </div>
                 ) : (
-                  <div className="status">
-                    <Icon type="add1" /> {Language['install']}
+                  <div className="status" onClick={toInstall}>
+                    <Icon type="add1" />
+                    {installing ? Language['installing'] : Language['install']}
                   </div>
                 )
               }

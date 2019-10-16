@@ -16,30 +16,29 @@ module.exports = function(io) {
       path: ctx.path,
       headers: ctx.headers,
       httpVersion: ctx.clientRequest.httpVersion,
-      time: ctx.time
+      time: ctx.time,
+      timing: ctx.timing
     });  
   });
   
   proxy.on('requestEnd', async (ctx) => {
     io.emit('requestEnd', {
       id: ctx.id,
+      timing: ctx.timing,
       body: (await ctx.getLocalReqBodyData()).toString(),
     });  
   });
-  
-  // proxy.on('response', (ctx) => {
-  //   io.emit('response', {
-  //     id: ctx.id,
-  //     headers: ctx.headers,
-  //     body: ctx.body,
-  //     statusCode: ctx.statusCode,
-  //     time: ctx.time,
-  //     remote: ctx.remoteResponse.connection.remoteAddress
-  //   });  
-  // });
 
   proxy.on('response', (ctx) => {
-    ctx.setHeader('proxy-agent', 'pooy@0.0.1-beta');
+    io.emit('response', {
+      id: ctx.id,
+      headers: ctx.headers,
+      body: ctx.body,
+      statusCode: ctx.statusCode,
+      time: ctx.time,
+      timing: ctx.timing,
+      remote: ctx.remoteResponse.connection.remoteAddress
+    });
   });
   
   proxy.on('responseEnd', (ctx) => {
@@ -49,6 +48,7 @@ module.exports = function(io) {
       body: ctx.body,
       statusCode: ctx.statusCode,
       time: ctx.time,
+      timing: ctx.timing,
       remote: ctx.remoteResponse.connection.remoteAddress
     });  
   });
@@ -68,7 +68,7 @@ module.exports = function(io) {
     });  
   });
 
-  proxy.useRules(rules);
+  proxy.useRules(rules());
   
   proxy.listen(CONFIG.proxy_port);
 

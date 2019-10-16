@@ -29,14 +29,6 @@ class Modal extends React.PureComponent{
     document.body.removeChild(this.div);
   }
 
-  handleClick = (e) => {
-    this.handleClose();
-  }
-
-  stopPropagation = (e) => {
-    e.stopPropagation();
-  }
-
   handleClose = () => {
     const { onClose } = this.props;
 
@@ -58,11 +50,11 @@ class Modal extends React.PureComponent{
   render() {
     const Language = I18N[getLan()].global;
     const { visible } = this.state;
-    const { title, children, okText = Language['confirm'], cancelText = Language['cancel'], showCloseIcon } = this.props;
+    const { title, children, okText = Language['confirm'], cancelText = Language['cancel'], showCloseIcon, className, width } = this.props;
 
     return visible ? ReactDOM.createPortal((
-      <div className="modal-wrapper" onClick={this.handleClick}>
-        <div className="modal-inner" onClick={this.stopPropagation}>
+      <div className={`modal-wrapper ${className}`}>
+        <div className="modal-inner" style={{ width: +width }}>
           <div className="modal-header">
             <h1>{title}</h1>
             {showCloseIcon && <Icon type="close close-icon" onClick={this.handleClose} />}
@@ -80,7 +72,8 @@ class Modal extends React.PureComponent{
 
 Modal.defaultProps = {
   title: 'untitle',
-  showCloseIcon: false
+  showCloseIcon: false,
+  className: ''
 };
 
 export default Modal;

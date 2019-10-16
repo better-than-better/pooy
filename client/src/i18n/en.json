@@ -7,7 +7,8 @@
     "nav-setting": "setting",
     "nav-about": "about",
     "confirm": "confirm",
-    "cancel": "cancel"
+    "cancel": "cancel",
+    "select-placeholder": "please select"
   },
   "network": {
     "action-stop": "stop",
@@ -39,12 +40,17 @@
     "list-empty": "no records",
     "throttling-custom-placeholder": "default to noraml",
     "offline-tips": "offline",
-    "online-tips": "Normal network environment"
+    "online-tips": "Normal network environment",
+    "unsupported-type": "unsupported content-type to preview",
+    "empty-res-body": "empty res body",
+    "req-error": "req error",
+    "req-pending": "pending"
   },
   "rule": {
     "create": "create",
     "enable": "enable",
     "disable": "disable",
+    "edit": "edit",
     "enabled-desc": "proxy have been enabled globally",
     "disabled-desc": "proxy have been disabled globally",
     "type": "type",
@@ -54,14 +60,19 @@
     "empty": "no rules",
     "dns-analysis": "DSN Analysis",
     "request-forward": "Request Forward",
-    "custom-response-header": "Custom Response Header",
-    "custom-script": "Custom Script"
+    "custom-response": "Custom Response",
+    "custom-script": "Custom Script",
+    "modal-add-title": "Create Rule",
+    "modal-eidt-title": "Edit Rule",
+    "rule-type": "rule type",
+    "rule-type-placeholder": "please select"
   },
   "plugin": {
     "sub-title": "system plugins",
     "help-tips": "Experimental function, temporarily unavailable",
     "installed": "installed",
-    "install": "install"
+    "install": "install",
+    "installing": "installing"
   },
   "ca": {
     "help-tips": "Scan the code to download the root certificate, or directly access"

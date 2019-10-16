@@ -5,18 +5,7 @@ import './index.pcss';
 const RuleInfo = () => {
   return (
     <div className="rule-info">
-      <p>
-        <label>规则类型</label>
-        <select name="" id="">
-          <option value="">DNS解析</option>
-          <option value="">请求转发</option>
-          <option value="">响应头设置</option>
-          <option value="">请求头设置</option>
-          <option value="">自定义响应</option>
-        </select>
-      </p>
-      
-      <Button>新增规则</Button>
+      未匹配到规则
     </div>
   );
 };

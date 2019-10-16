@@ -1,0 +1,42 @@
+.pooy-textarea{
+  padding: 8px 12px;
+  min-width: 220px;
+  min-height: 120px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  outline-color: #f3afff;
+
+  &:hover{
+    border-color: #f3afff;
+  }
+
+  &:focus{
+    border-color: #f3afff;
+    border-right-width: 1px!important;
+    outline: 0;
+    box-shadow: 0 0 0 2px rgba(243, 175, 255, 0.91)；
+  }
+
+  &:disabled{
+    cursor: not-allowed;
+    background: rgba(238, 238, 238, 0.29);
+  }
+
+  &::-webkit-input-placeholder{
+    color: #999;
+  }
+
+  &:-moz-placeholder {
+    color: #999;
+  }
+
+  &::-moz-placeholder{
+    color: #999;
+  }
+
+  &:-ms-input-placeholder {
+    color: #999;
+  }
+}

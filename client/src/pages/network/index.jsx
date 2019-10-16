@@ -81,24 +81,31 @@ class Network extends React.PureComponent {
    * @param {Object} data
    */
   updateDataPool = (type, data) => {
-    const obj = this.state[type];
+    const allRecords = this.state[type];
+    const currRecord = {...allRecords[data.id], ...data};
 
-    obj[data.id] = {...obj[data.id], ...data};
-    this.setState({ [type]: {...obj} });
-    this.props.onData && this.props.onData(type, data);
+    allRecords[data.id] = currRecord;
+    this.setState({ [type]: {...allRecords} });
+    this.props.onData && this.props.onData(type, currRecord);
   }
 
   componentDidMount() {
     window.socket.on('request', (data) => {
+      if (!data.host) return;
       this.updateDataPool('requestData', data);
     });
 
     window.socket.on('requestEnd', (data) => {
-      console.log('requestEnd', data);
+      if (!this.state.requestData[data.id]) return;
       this.updateDataPool('requestData', data);
     });
 
+    window.socket.on('response', (data) => {
+      this.updateDataPool('responseData', data);
+    });
+
     window.socket.on('responseEnd', (data) => {
+      if (!this.state.responseData[data.id]) return;
       this.updateDataPool('responseData', data);
     });
 
@@ -110,6 +117,8 @@ class Network extends React.PureComponent {
    */
   fetchProxyStatus = async () => {
     const { enabled } = await API.fetchProxyStatus();
+
+    console.log('enabled', enabled)
 
     this.setState({ enabled });
   }
@@ -293,8 +302,8 @@ class Network extends React.PureComponent {
   render() {
     const Language = I18N[getLan()].network;
     const {
-      activeId, enabled, requestData = {},
-      responseData = {}, currentNetwork, mimieType,
+      activeId, enabled, currentNetwork, mimieType,
+      requestData = {}, responseData = {},
       keywords, visible, throttlingType
     } = this.state;
 
@@ -343,7 +352,7 @@ class Network extends React.PureComponent {
         <div className="action-bar">
           <div className="btns">
             <Button onClick={this.toggleStatus}>
-              {enabled ? <><Icon type="start" />{Language['action-start']}</> : <><Icon type="stop" />{Language['action-stop']}</>}
+              {enabled ? <><Icon type="stop" />{Language['action-stop']}</> : <><Icon type="start" />{Language['action-start']}</>}
             </Button>
             <Button onClick={this.clearData}><Icon type="clear" />{Language['action-clear']}</Button>
             <Button onClick={this.showModal}><Icon type="throttling" />{Language['action-throttling']}（{Language['action-throttling-unset']}）</Button>

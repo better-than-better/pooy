@@ -31,7 +31,7 @@ module.exports = function () {
 
       client.on('enabled', (enabled) => {
         console.log('enabled', enabled);
-        proxy.direct = enabled;
+        proxy.direct = !enabled;
       });
     });
   });

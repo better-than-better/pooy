@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import I18N from '@i18n';
+import { getLan } from '@helper/utils';
+
 import API from '@api';
 import Icon from '@components/icon';
 import Spin from '@components/spin';
@@ -17,14 +20,14 @@ import './index.pcss';
 const { TabPane } = Tabs;
 
 const filterWidth = (width) => {
-  const minWidth = 200;
+  const minWidth = 560;
   const maxWidth = document.body.offsetWidth - 120;
 
   return width = width < minWidth ? minWidth : width > maxWidth ? maxWidth : width;
 }
 
 const getUserWidth = () => {
-  const containerWidth = +localStorage.getItem('containerWidth');
+  const containerWidth = +localStorage.getItem('pooy:containerWidth');
 
   return isNaN(containerWidth) ? null : filterWidth(containerWidth);
 };
@@ -108,6 +111,7 @@ class NetworkDetail extends React.PureComponent{
    * @param {String} activeKey
    */
   fetchResponse = async (requestId, activeKey) => {
+    const Language = I18N[getLan()].network;
     const { resData } = this.props.data;
     const hasResponsed = !!resData.statusCode;
     const contentType = getField(resData.headers, 'content-type');
@@ -122,7 +126,7 @@ class NetworkDetail extends React.PureComponent{
       });
     } else {
       if (!/(text|application)/.test(contentType)) {
-        this.setState({ responseBody: `⚠️⚠️不支持查看的请求体 ➜➜➜ content-type: ${contentType}` });
+        this.setState({ responseBody: `⚠️⚠️${Language['unsupported-type']} ➜➜➜ content-type: ${contentType}` });
       } else {
         const res = await API.fetchResponse(requestId);
 
@@ -137,7 +141,6 @@ class NetworkDetail extends React.PureComponent{
    * 开始拖拽
    */
   handleMouseDown = (e) => {
-    console.log('开始拖拽');
     this.startX = e.clientX;
     this.isResizing = true;
     document.body.style.userSelect = 'none';
@@ -149,7 +152,7 @@ class NetworkDetail extends React.PureComponent{
   handleMouseUp = () => {
     this.isResizing = false;
     document.body.style.userSelect = '';
-    this.ref && localStorage.setItem('containerWidth', this.ref.offsetWidth);
+    this.ref && localStorage.setItem('pooy:containerWidth', this.ref.offsetWidth);
   }
 
   /**
@@ -167,6 +170,7 @@ class NetworkDetail extends React.PureComponent{
   }, 10)
 
   render() {
+    const Language = I18N[getLan()].network;
     const { visible, responseBody, activeKey, loading } = this.state; 
     const { reqData, resData } = this.props.data;
     const generalData = {
@@ -182,12 +186,10 @@ class NetworkDetail extends React.PureComponent{
     const queryString = generalData['Request URL'].split('?')[1];
     const contentType = getField(reqData.headers, 'content-type');
 
-    console.log(reqData.headers)
-
     return  visible ? ReactDOM.createPortal((
       <div className="network-detail" ref={ref => this.ref = ref } style={{ width: getUserWidth() }}>
         <div className="drag" onMouseDown={this.handleMouseDown} />
-        <Icon type="close close-icon" onClick={this.closeModal} />
+        <Icon type="close1 close-icon" onClick={this.closeModal} />
         <Tabs activeKey={activeKey} onChange={this.handleTabChange}>
           <TabPane tab="Header" key="header">
             <InfoBlock title="General" data={generalData} noSort noSource />
@@ -225,8 +227,8 @@ class NetworkDetail extends React.PureComponent{
               {resData.statusCode
                 ? responseBody
                   ? <textarea className="response-body" value={responseBody} readOnly />
-                  : <div className="empty-body">没有响应体</div>
-                : <div className="empty-body">{hasError ? `请求失败: ${resData.error.message}` : '等待响应'}</div>
+                  : <div className="empty-body">{Language['empty-res-body']}</div>
+                : <div className="empty-body">{hasError ? `${Language['req-error']}: ${resData.error.message}` : Language['req-pending']}</div>
               }
             </Spin>
           </TabPane>}

@@ -24,6 +24,13 @@ npm run dev
 npm run build
 ```
 
+## Pack
+
+```bash
+npm run pack
+```
+
+
 ## Analyze
 
 ```bash
