@@ -118,8 +118,6 @@ class Network extends React.PureComponent {
   fetchProxyStatus = async () => {
     const { enabled } = await API.fetchProxyStatus();
 
-    console.log('enabled', enabled)
-
     this.setState({ enabled });
   }
 

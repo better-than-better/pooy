@@ -1,4 +1,5 @@
 const http = require('http');
+const ora = require('ora');
 const socket = require('socket.io');
 const CONFIG = require('../config/index');
 
@@ -6,11 +7,13 @@ const requestHandler = require('./request-handler');
 
 module.exports = function () {
   return new Promise((reslove, reject) => {
+    const spinner = ora('start server...').start();
     const baseServer = http.createServer();
 
     baseServer.on('request', requestHandler);
     baseServer.on('error', reject);
     baseServer.listen(CONFIG.client_port, () => {
+      spinner.stop();
       reslove();
     });
 
@@ -30,7 +33,6 @@ module.exports = function () {
       });
 
       client.on('enabled', (enabled) => {
-        console.log('enabled', enabled);
         proxy.direct = !enabled;
       });
     });

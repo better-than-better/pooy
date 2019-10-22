@@ -5,12 +5,19 @@ const { getIps } = require('../server/utils');
 const pkg = require('../package.json');
 const CONFIG = require('../config/index');
 const start = require('../scripts/start');
+const macProxyManager = require('../tools/mac-proxy-manager');
+const checkUpdate = require('../tools/check-update');
+
+process.env.POOY = {};
 
 program
   .option('-g, --global', 'global mode')
   .option('-m, --manual', 'manual start')
   .description('start proxy server')
-  .action(({ global, manual }) => {
+  .action(async ({ global, manual }) => {
+
+    await checkUpdate();
+
     start({ global, manual }).then(() => {
       const IPv4 = getIps().IPv4;
       const proxyAddress =  `http://${IPv4}:${CONFIG.proxy_port}`;
@@ -19,11 +26,20 @@ program
       console.log('* Pooy successfully started.');
       console.log(`* proxy server run at: ${chalk.bold.blue(proxyAddress)}`);
       console.log(`* proxy web ui see: ${chalk.bold.yellow(clientAddress)}`);
-    }).catch(() => {
-      console.log('fail to start');
+    }).catch((e) => {
+      console.log('fail to start', e);
     });
   });
 
 program.version(pkg.version);
 
 program.parse(process.argv);
+
+process.on('SIGINT', () => {
+  process.exit();
+});
+
+process.on('exit', () => {
+  console.log(`\n\n ⚠️ Pooy has stoped.`);
+  process.env.POOY.proxy_global && macProxyManager.clearWebProxy();
+});
