@@ -1,6 +1,6 @@
 {
   "name": "pooy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "http proxy",
   "main": "index.js",
   "directories": {

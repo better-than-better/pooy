@@ -1,1 +1,10 @@
 node_modules
+docs
+.gitignore
+.npmignore
+client/assets
+client/src
+client/ssl
+client/webpack
+client/.babelrc
+client/.postcssrc.js
