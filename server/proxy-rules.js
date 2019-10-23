@@ -69,7 +69,7 @@ function formatRules(rules) {
         response: {
           statusCode: v.statusCode,
           direct: v.resDirect,
-          body: v.bodyType === 'file' ? safeReadStream(v.body) : v.body,  // TODO: 考虑文件不存在的情况要不要报 404
+          body: v.bodyType === 'file' ? () => safeReadStream(v.body) : v.body,  // TODO: 考虑文件不存在的情况要不要报 404
           discardOriginalHeaders: v.discardOriginalHeaders,
           headers: filterHeaders(v.headers)
         }

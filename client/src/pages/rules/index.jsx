@@ -79,13 +79,16 @@ class Rules extends React.PureComponent {
     this.setState({ checked });
   }
 
-  showModal = (action, ruleData) => {
+  showModal = (action, ruleId) => {
     const newState = {};
 
     if (action === 'add') {
       newState.ruleData = {};
       newState.ruleType = undefined;
     } else {
+      const { listData } = this.state;
+      const ruleData = {...listData.find(v => v.id === ruleId)} || {};
+
       newState.ruleData = ruleData;
       newState.ruleType = ruleData.type;
     }
@@ -112,7 +115,7 @@ class Rules extends React.PureComponent {
       return;
     };
 
-    ruleData.type = ruleType;
+    ruleData.type = {...ruleType};
     const handler = ruleData.id ? API.updateProxyRule : API.saveProxyRule;
     const data = await handler(ruleData);
 
@@ -122,6 +125,10 @@ class Rules extends React.PureComponent {
 
     message.success('操作成功');
     this.fetchRules();
+    this.closeModal();
+  }
+
+  handleCancel = () => {
     this.closeModal();
   }
 
@@ -147,7 +154,7 @@ class Rules extends React.PureComponent {
       width: '20%',
       render: (val, v) => (
         <div className="menus">
-          <a className="edit-menu" href="javasscript:" onClick={this.showModal.bind(null, 'edit', v)}>{Language['edit']}</a>
+          <a className="edit-menu" href="javasscript:" onClick={this.showModal.bind(null, 'edit', v.id)}>{Language['edit']}</a>
           <a className="del-menu" href="javasscript:" onClick={this.delRule.bind(null, v.id)} >{Language['del']}</a>
           {
             v.enabled
@@ -217,7 +224,7 @@ class Rules extends React.PureComponent {
           visible={visible}
           width="780"
           onOk={this.handleOk}
-          onCancel={this.closeModal}
+          onCancel={this.handleCancel}
         >
           <ItemRow name={Language['rule-type']}>
             <Select value={ruleType} onChange={this.handleRuleType} width="220" disable={isEdit}>

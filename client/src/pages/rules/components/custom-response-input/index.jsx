@@ -82,7 +82,7 @@ class CustomResponseInput extends React.PureComponent {
           {
             bodyType === 'text'  && <Textarea placeholder="响应体" width="640" value={body} onChange={this.handleValue.bind(null, 'body')} />
           }
-          {bodyType !== undefined && <Checkbox checked={resDirect} onChange={this.handleValue.bind(null, 'resDirect')}>直接响应，不请求源地址</Checkbox>}
+          {/* {bodyType !== undefined && <Checkbox checked={resDirect} onChange={this.handleValue.bind(null, 'resDirect')}>直接响应，不请求源地址</Checkbox>} */}
         </ItemRow>
         <ItemRow name="响应头">
           <HeaderPicker value={headers} onChange={this.handleValue.bind(null, 'headers')} />

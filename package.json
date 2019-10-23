@@ -1,6 +1,6 @@
 {
   "name": "pooy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "http proxy",
   "main": "index.js",
   "directories": {
@@ -22,7 +22,7 @@
     "marked": "^0.7.0",
     "mime": "^2.4.4",
     "ora": "^4.0.2",
-    "pooy-core": "0.0.1",
+    "pooy-core": "0.0.2",
     "prettier": "1.18.2",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
