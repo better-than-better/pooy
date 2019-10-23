@@ -43,8 +43,8 @@ program
       console.log('* pooy successfully started.');
       console.log(`* proxy server run at: ${chalk.bold.blue(proxyAddress)}`);
       console.log(`* proxy web ui see: ${chalk.bold.yellow(clientAddress)}`, '\n');
-    }).catch((e) => {
-      console.log('fail to start', e);
+    }).catch(() => {
+      console.log('fail to start');
     });
   });
 
