@@ -1,4 +1,7 @@
 {
+  "bin": {
+    "pooy": "bin/pooy"
+  },
   "name": "pooy",
   "version": "0.0.3",
   "description": "http proxy",
