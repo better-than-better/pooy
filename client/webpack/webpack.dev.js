@@ -12,7 +12,7 @@ module.exports = merge(baseWebpackConfig, {
   devServer: {
     compress: true,
     hot: true,
-    port: 9001,
+    port: 4001,
     open: true,
     host: '0.0.0.0',
     // https: {

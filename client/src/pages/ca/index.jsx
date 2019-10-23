@@ -7,6 +7,7 @@ import './index.pcss';
 
 const CA = () => {
   const Language = I18N[getLan()].ca;
+  const [ data, setData ] = useState({});
   const [ rootCA, setRootCA ] = useState();
   const [ qrcodeImg, setQrcodeImg ] = useState();
 
@@ -24,6 +25,7 @@ const CA = () => {
     });
 
     setRootCA(caPath);
+    setData(res);
   };
 
   useEffect(() => {
@@ -33,7 +35,8 @@ const CA = () => {
   return (
     <div className="ca-wrapper">
       <img src={qrcodeImg} alt="qrcode" />
-      <p>{Language['help-tips']} <a href={rootCA}>{rootCA}</a></p>
+      <p>1. {Language['set-proxy']}: <a href="javascript:">{data.IPv4}:{data.port}</a></p>
+      <p>2. {Language['help-tips']} <a href={rootCA}>{rootCA}</a></p>
     </div>
   );
 };

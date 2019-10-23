@@ -68,6 +68,13 @@ class API {
   static async updateGlobalRuleStatus(enabled) {
     return await putJSON(`${HOST}/proxy-rules-status.pooy`, { body: { enabled } });
   }
+
+  /**
+   * check update
+   */
+  static async checkUpdate() {
+    return await postJSON(`${HOST}/check-update.pooy`);
+  }
 }
 
 export default API;

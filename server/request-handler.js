@@ -3,6 +3,8 @@ const fs = require('fs');
 const querystring = require('querystring');
 const mime = require('mime');
 const { getIps, getReqJSON, saveOrUpdateRule, getRules, delRule, setProxyRulesStatus, getProxyRulesStatus } = require('./utils');
+const checkUpdate  = require('../tools/check-update');
+const CONFIG = require('../config');
 const PROXY_HOST = 'ca.pooy'
 
 const POOY_DIR = `${process.env.HOME}/.pooy`;
@@ -10,6 +12,7 @@ const proxyRules = require('./proxy-rules');
 
 module.exports = async function (req, res) {
   if (res.headersSent) return;
+
   const proxy = global.proxy;
 
   res.setHeader('access-control-allow-credentials', true);
@@ -23,6 +26,10 @@ module.exports = async function (req, res) {
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify(data));
   };
+
+  if (req.method === 'OPTIONS') {
+    return res.end('');
+  }
 
   if (!/\.pooy$/.test(pathname)) {
     const p = `${__dirname}/../client/dist${pathname === '/' ? pathname + 'index.html' : pathname}`;
@@ -59,8 +66,9 @@ module.exports = async function (req, res) {
   if (pathname === '/ca.pooy') {
     resJSON({
       path: '',
-      ip: getIps(),
-      host: PROXY_HOST
+      port: CONFIG.proxy_port,
+      host: PROXY_HOST,
+      ...getIps()
     });
 
     // resJSON({
@@ -123,6 +131,12 @@ module.exports = async function (req, res) {
 
       return resJSON({ message: 'ok' });
     }
+  }
+
+  if (pathname === '/check-update.pooy') {
+    const data = await checkUpdate(true);
+
+    resJSON(data);
   }
   
 

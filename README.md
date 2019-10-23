@@ -12,24 +12,31 @@ just a http proxy / http monitor tool powered by nodejs. based on [pooy-core](ht
 
 see <https://pooy.hxtao.xyz>
 
+## Usage
+
+```
+sudo pooy --[options]
+```
+
+options:
+
+- `manual` default value, just start the Pooy
+- `global` auto set http proxy globally
+- `debug`
+
 ## Run dev
+
+clone this repository
 
 ```bash
 npm run dev
 ```
 
-## Build prod
+## Build
 
 ```bash
 npm run build
 ```
-
-## Pack
-
-```bash
-npm run pack
-```
-
 
 ## Analyze
 

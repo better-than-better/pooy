@@ -238,9 +238,9 @@ class NetworkDetail extends React.PureComponent{
               reqCookie={getField(reqData.headers, 'cookie')}
             />
           </TabPane>
-          <TabPane tab="Rule" key="rule">
+          {/* <TabPane tab="Rule" key="rule">
             <RuleInfo />
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </div>
     ), this.div) : null;

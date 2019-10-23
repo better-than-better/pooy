@@ -22,7 +22,7 @@ exports.getIps = function () {
       IPv4 = address;
     }
 
-    if (family === 'IPv4') {
+    if (family === 'IPv6') {
       IPv6 = address;
     }
   });
@@ -84,12 +84,12 @@ exports.parseScriptStr = function (str) {
  * 获取请求 body && to json
  */
 exports.getReqJSON = function (req) {
-  return new Promise((reslove, reject) => {
+  return new Promise((resolve, reject) => {
     const data = [];
 
     req.on('data', (chunk) => { data.push(chunk) });
     req.on('end', () => {
-      reslove(JSON.parse(Buffer.concat(data).toString()));
+      resolve(JSON.parse(Buffer.concat(data).toString()));
     });
     req.on('error', (err) => {
       reject(err);

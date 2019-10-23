@@ -10,9 +10,9 @@ if (!process.env.SUDO_USER) {
 server().then(() => {
   spawn('npm', ['run', 'client:dev'], { stdio: 'inherit' }, (err, stdout, stderr) => {
     if (err) {
-        console.error(`exec error: ${err}`);
-        process.exit(1);
-        return;
+      console.error(`exec error: ${err}`);
+      process.exit(1);
+      return;
     }
   });
 });

@@ -127,6 +127,7 @@ class Network extends React.PureComponent {
   toggleStatus = () => {
     const enabled = !this.state.enabled;
     socket.emit('enabled', enabled);
+    console.log('emit enabled', enabled);
     this.setState({ enabled });
   }
 
@@ -353,8 +354,8 @@ class Network extends React.PureComponent {
               {enabled ? <><Icon type="stop" />{Language['action-stop']}</> : <><Icon type="start" />{Language['action-start']}</>}
             </Button>
             <Button onClick={this.clearData}><Icon type="clear" />{Language['action-clear']}</Button>
-            <Button onClick={this.showModal}><Icon type="throttling" />{Language['action-throttling']}（{Language['action-throttling-unset']}）</Button>
-            <Button disabled><Icon type="repeat" />{Language['action-repeat']}</Button>
+            {/* <Button onClick={this.showModal}><Icon type="throttling" />{Language['action-throttling']}（{Language['action-throttling-unset']}）</Button> */}
+            {/* <Button disabled><Icon type="repeat" />{Language['action-repeat']}</Button> */}
           </div>
           <div className="filter-wrapper">
             <input

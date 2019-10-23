@@ -14,7 +14,7 @@ import io from 'socket.io-client';
 
 import './app.pcss';
 
-window.socket = io('http://127.0.0.1:9000');
+window.socket = io('http://127.0.0.1:9001');
 
 class App extends React.PureComponent{
   state = {

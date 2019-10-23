@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const ora = require('ora');
 const program = require('commander');
 const chalk = require('chalk');
 const { getIps } = require('../server/utils');
@@ -13,19 +14,35 @@ process.env.POOY = {};
 program
   .option('-g, --global', 'global mode')
   .option('-m, --manual', 'manual start')
+  .option('-d, --debug', 'debug mode')
   .description('start proxy server')
-  .action(async ({ global, manual }) => {
+  .action(async ({ global, manual, debug }) => {
+    const spinner = ora('checking for updates...').start();
+    const { needUpdate, version } = await checkUpdate();
 
-    await checkUpdate();
+    spinner.stop();
 
-    start({ global, manual }).then(() => {
+    if (needUpdate) {
+      console.log('=========================================================================\n');
+      console.log(chalk.cyan('    🍋 an update is available for you, the latest version:'), chalk.bold.cyan(version.latest), '\n');
+      console.log('            ', 'try `' + chalk.yellow('npm update pooy -g') + '` to update', '\n');
+      console.log('=========================================================================');
+    } else {
+      console.log('🍷 already the latest version');
+    }
+
+    if (debug) {
+      process.env.DEBUG = true;
+    }
+
+    start({ global, manual, debug }).then(() => {
       const IPv4 = getIps().IPv4;
       const proxyAddress =  `http://${IPv4}:${CONFIG.proxy_port}`;
       const clientAddress = `http://${IPv4}:${CONFIG.client_port}`;
 
-      console.log('* Pooy successfully started.');
+      console.log('* pooy successfully started.');
       console.log(`* proxy server run at: ${chalk.bold.blue(proxyAddress)}`);
-      console.log(`* proxy web ui see: ${chalk.bold.yellow(clientAddress)}`);
+      console.log(`* proxy web ui see: ${chalk.bold.yellow(clientAddress)}`, '\n');
     }).catch((e) => {
       console.log('fail to start', e);
     });

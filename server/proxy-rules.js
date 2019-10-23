@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { getIps, getRules, safeReadStream, urlParse, parseScriptStr } = require('./utils');
-const PROXY_PORT = 9009;
+const CONFIG = require('../config');
 const CLIENT_PORT = 9001;
 
 function filterHeaders (arr = []) {
@@ -94,14 +94,14 @@ module.exports = function () {
     },
     request: {
       pathname: '/ssl',
-      host: `${getIps().IPv4}:${PROXY_PORT}`
+      host: `${getIps().IPv4}:${CONFIG.proxy_port}`
     }
   }, {
     test: (ctx) => {
       return ctx.hostname === 'cli.pooy';
     },
     request: {
-      host: `${getIps().IPv4}:${CLIENT_PORT}`
+      host: `${getIps().IPv4}:${CONFIG.client_port}`
     }
   }];
 

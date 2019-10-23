@@ -41,7 +41,7 @@ class Layout extends React.PureComponent{
           <nav>
             <NavLink exact to="/" title={Language['nav-network']}><Icon type="network" />{Language['nav-network']}</NavLink>
             <NavLink to="/rules" title={Language['nav-rule']}><Icon type="rules" />{Language['nav-rule']}</NavLink>
-            <NavLink to="/plugins" title={Language['nav-plugin']}><Icon type="plugins" />{Language['nav-plugin']}</NavLink>
+            {/* <NavLink to="/plugins" title={Language['nav-plugin']}><Icon type="plugins" />{Language['nav-plugin']}</NavLink> */}
             <NavLink to="/ca" title={Language['nav-ca']}><Icon type="ca" />{Language['nav-ca']}</NavLink>
             <NavLink to="/setting" title={Language['nav-setting']}><Icon type="setting" />{Language['nav-setting']}</NavLink>
             <NavLink to="/about" title={Language['nav-about']}><Icon type="about" />{Language['nav-about']}</NavLink>

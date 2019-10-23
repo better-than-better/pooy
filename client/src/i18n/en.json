@@ -75,6 +75,7 @@
     "installing": "installing"
   },
   "ca": {
+    "set-proxy": "Configure your device to use Pooy as it's HTTP proxy on",
     "help-tips": "Scan the code to download the root certificate, or directly access"
   },
   "setting": {
@@ -86,6 +87,7 @@
     "sub-title": "about pooy",
     "current-v": "current version",
     "check-update": "check update",
-    "updated": "already the latest"
+    "updated": "already the latest",
+    "outupdated": "outupdated"
   }
 }

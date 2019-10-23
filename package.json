@@ -1,14 +1,13 @@
 {
   "name": "pooy",
-  "version": "0.0.1-beta1",
+  "version": "0.0.1",
   "description": "http proxy",
   "main": "index.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "start": "sudo electron ./app.js",
-    "pack": "electron-packager . pooy --platform=darwin --arch=x64 --ignore=node_modules --ignore=docs --ignore=README.md",
+    "start": "sudo node bin/pooy",
     "dev": "node scripts/dev.js",
     "client:dev": "NODE_ENV=development webpack-dev-server --config client/webpack/webpack.dev.js",
     "build": "rm -rf client/dist && NODE_ENV=production webpack --config client/webpack/webpack.prod.js",
@@ -19,11 +18,11 @@
     "@babel/runtime": "^7.4.4",
     "chalk": "^2.4.2",
     "commander": "^3.0.2",
-    "electron": "^6.0.12",
+    "compare-versions": "^3.5.1",
     "marked": "^0.7.0",
     "mime": "^2.4.4",
     "ora": "^4.0.2",
-    "pooy-core": "0.0.1-beta1",
+    "pooy-core": "0.0.1",
     "prettier": "1.18.2",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
