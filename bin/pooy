@@ -23,10 +23,10 @@ program
     spinner.stop();
 
     if (needUpdate) {
-      console.log('=========================================================================\n');
-      console.log(chalk.cyan('    🍋 an update is available for you, the latest version:'), chalk.bold.cyan(version.latest), '\n');
-      console.log('            ', 'try `' + chalk.yellow('npm update pooy -g') + '` to update', '\n');
-      console.log('=========================================================================');
+      console.log('================================================================================================\n');
+      console.log(chalk.cyan('        🍋 an update is available for you, the latest version:'), chalk.bold.cyan(version.latest), chalk.yellow(`, current: ${version.current}`), '\n');
+      console.log('                 ', 'try `' + chalk.yellow('npm update pooy -g') + '` to update', '\n');
+      console.log('================================================================================================');
     } else {
       console.log('🍷 already the latest version');
     }

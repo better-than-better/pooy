@@ -115,7 +115,7 @@ class Rules extends React.PureComponent {
       return;
     };
 
-    ruleData.type = {...ruleType};
+    ruleData.type = ruleData.type || ruleType;
     const handler = ruleData.id ? API.updateProxyRule : API.saveProxyRule;
     const data = await handler(ruleData);
 
