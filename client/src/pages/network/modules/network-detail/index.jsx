@@ -122,7 +122,7 @@ class NetworkDetail extends React.PureComponent{
 
     if (activeKey === 'preview' && /(image|video|audio)/.test(contentType)) {
       this.setState({
-        responseBody: `//127.0.0.1:9000/response.pooy?id=${requestId}`
+        responseBody: `//${location.host}/response.pooy?id=${requestId}`
       });
     } else {
       if (!/(text|application)/.test(contentType)) {
