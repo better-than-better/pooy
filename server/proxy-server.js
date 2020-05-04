@@ -77,6 +77,7 @@ module.exports = function proxyServer() {
 
     proxy.ignore([
       `${IPv4}:${CONFIG.client_port}`,
+      `${IPv4}:${CONFIG.socket_port}`,
       `127.0.0.1:${CONFIG.client_port}`,
       `0.0.0.0:${CONFIG.client_port}`
     ]);

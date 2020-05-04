@@ -1,6 +1,6 @@
 import { get, del, postJSON, putJSON } from '@helper/fetch';
 
-const HOST = '//127.0.0.1:9000';
+const HOST = `//${location.host}`;
 
 class API {
   /**
