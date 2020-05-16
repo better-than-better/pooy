@@ -3,7 +3,7 @@
     "pooy": "bin/pooy"
   },
   "name": "pooy",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "http proxy",
   "main": "index.js",
   "directories": {
@@ -27,7 +27,8 @@
     "ora": "^4.0.4",
     "qrcode": "^1.4.1",
     "socket.io": "^2.2.0",
-    "yaml": "^1.7.0"
+    "yaml": "^1.7.0",
+    "pooy-core": "0.1.1"
   },
   "devDependencies": {
     "@babel/runtime": "^7.4.4",
@@ -40,7 +41,6 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "whatwg-fetch": "^3.0.0",
-    "pooy-core": "0.1.0",
     "@babel/core": "^7.4.4",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-transform-runtime": "^7.4.4",
