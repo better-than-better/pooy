@@ -25,10 +25,10 @@ program
     if (needUpdate) {
       console.log('================================================================================================\n');
       console.log(chalk.cyan('        🍋 an update is available for you, the latest version:'), chalk.bold.cyan(version.latest), chalk.yellow(`, current: ${version.current}`), '\n');
-      console.log('                 ', 'try `' + chalk.yellow('npm update pooy -g') + '` to update', '\n');
+      console.log('                 ', 'try `' + chalk.yellow('npm i pooy -g') + '` to update', '\n');
       console.log('================================================================================================');
     } else {
-      console.log('🍷 already the latest version');
+      console.log('>> ✅ already up to date');
     }
 
     if (debug) {
@@ -44,7 +44,8 @@ program
       console.log(`* proxy server run at: ${chalk.bold.blue(proxyAddress)}`);
       console.log(`* proxy web ui see: ${chalk.bold.yellow(clientAddress)}`, '\n');
     }).catch(() => {
-      console.log('fail to start');
+      console.log('>> ❌ fail to start');
+      process.exit(0);
     });
   });
 
@@ -57,6 +58,6 @@ process.on('SIGINT', () => {
 });
 
 process.on('exit', () => {
-  console.log(`\n\n ⚠️ Pooy has stoped.`);
+  console.log(`\n\n🚧 Pooy has stoped.`);
   process.env.POOY.proxy_global && macProxyManager.clearWebProxy();
 });

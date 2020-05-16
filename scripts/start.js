@@ -5,7 +5,7 @@ const CONFIG = require('../config');
 
 module.exports = function start(options) {
   if (!process.env.SUDO_USER) {
-    console.log('administrator privileges is required, please try ' + chalk.bold.yellow('sudo pooy'));
+    console.log('>> administrator privileges is required, please try ' + chalk.bold.yellow('sudo pooy'));
     return Promise.reject();
   }
 
