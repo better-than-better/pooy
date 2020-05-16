@@ -28,7 +28,7 @@
     "qrcode": "^1.4.1",
     "socket.io": "^2.2.0",
     "yaml": "^1.7.0",
-    "pooy-core": "0.1.1"
+    "pooy-core": "0.1.0"
   },
   "devDependencies": {
     "@babel/runtime": "^7.4.4",
